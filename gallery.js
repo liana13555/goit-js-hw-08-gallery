@@ -1,15 +1,5 @@
 import pictures from '/gallery-items.js';
 
-// console.log(pictures);
-
-// const picture = {
-//     preview:
-//       'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg',
-//     original:
-//       'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825_1280.jpg',
-//     description: 'Hokkaido Flower',
-// },
-  
 const galleryContainer = document.querySelector('.js-gallery');
 const cardsMarkup = makePictureCardMarkup(pictures);
 
@@ -102,10 +92,25 @@ function onEscKeyPress(evt) {
 }
 
 // Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо"
-window.addEventListener('keydown', onPrevNextPress);
+window.addEventListener('keydown', switchImages);
 
-function onPrevNextPress(evt) {
-     if (evt.code === 'ArrowRight') {     
+const arrayImg = pictures.map((item) => item.original); 
+    
+function switchImages(evt) {        
+    let index = arrayImg.indexOf(refs.lightboxImage.src);
+    
+    if (evt.code === 'ArrowRight') {
+        if (index < arrayImg.length - 1) {
+            refs.lightboxImage.setAttribute("src", arrayImg[index + 1]);
+        } else {
+            index = -1;
+            refs.lightboxImage.setAttribute("src", arrayImg[index + 1]);
+        }
+    }
+    if (evt.code === 'ArrowLeft') {
+        if (index === 0) {
+            index = arrayImg.length;
+            refs.lightboxImage.setAttribute("src", arrayImg[index - 1]);
+        } else refs.lightboxImage.setAttribute("src", arrayImg[index - 1]);
     }
 }
-
