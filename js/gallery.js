@@ -1,4 +1,4 @@
-import pictures from '/gallery-items.js';
+import pictures from './gallery-items.js';
 
 const galleryContainer = document.querySelector('.js-gallery');
 const cardsMarkup = makePictureCardMarkup(pictures);
